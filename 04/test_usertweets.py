@@ -2,8 +2,8 @@ import csv
 import datetime
 import unittest
 
-from usertweets import UserTweets
 from usertweets import NUM_TWEETS
+from usertweets import UserTweets
 
 DT = datetime.datetime(2017, 1, 13, 9, 0, 5)
 HANDLE = 'pybites'
@@ -14,14 +14,15 @@ TWEETS = (
 )
 USER = UserTweets(HANDLE, max_id=MAX_ID)
 
+
 def read_csv():
     with open(USER.output_file) as f:
         r = csv.reader(f)
         next(r, None)  # skip the headers
-        return list(r) 
+        return list(r)
+
 
 class TestUserTweets(unittest.TestCase):
-
     def test_num_tweets(self):
         self.assertEqual(len(USER), NUM_TWEETS)
 
@@ -36,7 +37,8 @@ class TestUserTweets(unittest.TestCase):
         self.assertEqual(csv_tweets[0][0], MAX_ID)
         self.assertEqual(csv_tweets[0][1], str(DT))
         self.assertEqual(csv_tweets[0][2], TWEETS[0])
-        self.assertEqual(csv_tweets[-1][2], TWEETS[1])
+        self.assertEqual(csv_tweets[-2][2], TWEETS[1])
+
 
 if __name__ == "__main__":
     unittest.main()
